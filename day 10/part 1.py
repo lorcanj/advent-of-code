@@ -15,7 +15,6 @@ for i in range(len(island)):
     for j in range(len(island[i])):
         if island[i][j] == 0:
             starts.append((i, j))
-#print(starts)
 
 
 def in_bound(row, col, matrix) -> bool:
@@ -45,8 +44,6 @@ def valid_path(row, col, matrix, visited: set, found: set) -> (int, tuple):
 
 ans = 0
 for start in starts:
-    #print(f"{start[0]} and {start[1]}")
     thing = valid_path(start[0], start[1], island, set(), set())
     ans += thing[0]
-    #print(thing)
-print(ans)
+
