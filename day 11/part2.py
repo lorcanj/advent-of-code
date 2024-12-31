@@ -1,15 +1,19 @@
 import math
+from functools import cache
 
 test = "test.txt"
 input = "input.txt"
 test2 = "test2.txt"
 
+cached_stones = {}
+
+cached_stone_blinks = {}
 
 # no return value because can return more than a single thing
-def update_stone(_stone: int, arr: []) -> None:
+@cache
+def update_stone(_stone: int) -> []:
     if _stone == 0:
-        arr.append(1)
-        return
+        return [1]
     digits = math.floor(math.log(_stone, 10) + 1)
     if digits & 1 == 0:
         left_num = 0
@@ -29,24 +33,33 @@ def update_stone(_stone: int, arr: []) -> None:
             _stone -= rem
             _stone //= 10
             checker += 1
-        arr.append(left_num)
-        arr.append(right_num)
+        return [left_num, right_num]
     else:
-        arr.append(_stone * 2024)
+        return [_stone * 2024]
 
 
 # build input
-file = open(input)
+file = open(test2)
 
 stones = [int(number) for number in file.readline().strip().split(" ")]
 
-blinks = 25
+blinks = 2
 
-for i in range(blinks):
-    new_output = []
-    for stone in stones:
-        update_stone(stone, new_output)
-    stones = new_output
-    #print(stones)
+# want to cache the function below
 
-print(len(stones))
+
+@cache
+def calculate_stones(_stone: int, _blinks: int):
+    if _blinks == 0:
+        return 1
+    # can be an array of 1 or 2 stones
+    transformed_stones = update_stone(_stone)
+    return sum(calculate_stones(num, _blinks - 1) for num in transformed_stones)
+
+
+ans = 0
+for stone in stones:
+    ans += calculate_stones(stone, blinks)
+    print(ans)
+
+print(ans)
