@@ -2,7 +2,7 @@ import math
 
 test = "test.txt"
 input = "input.txt"
-test2 = "test2.txt"
+test2 = "test2.txt.txt"
 
 # Dictionaries to store the computed values for memoization
 cached_stones = {}
