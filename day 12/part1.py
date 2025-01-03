@@ -55,7 +55,7 @@ for line in file:
     matrix.append([c for c in line.strip()])
 
 visited = set()
-
+separate_islands = []
 ans = 0
 
 for row in range(len(matrix)):
@@ -66,12 +66,14 @@ for row in range(len(matrix)):
             letter = matrix[row][col]
             dfs_islands(row, col, matrix, visited, letter)
             actual = visited - before_set
+            separate_islands.append(list(actual))
 
-            # area is number of segments
-            area = len(actual)
+            # part 1 calc
+            # # area is number of segments
+            # area = len(actual)
+            #
+            # # perimeter is more complicated
+            # perimeter = count_connections(actual)
+            # ans += (area * perimeter)
 
-            # perimeter is more complicated
-            perimeter = count_connections(actual)
-            ans += (area * perimeter)
 
-print(ans)
