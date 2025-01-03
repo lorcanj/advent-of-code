@@ -3,7 +3,7 @@ from functools import cache
 
 test = "test.txt"
 input = "input.txt"
-test2 = "test2.txt"
+test2 = "test2.txt.txt"
 
 cached_stones = {}
 
