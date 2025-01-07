@@ -20,7 +20,7 @@ def create_button_data(path: str) -> list:
 
         if split_parts[0] == 'Prize':
             further_split = split_parts[1].split("=")
-            temp.append((further_split[1].split(',')[0], further_split[2]))
+            temp.append((10000000000000 + int(further_split[1].split(',')[0]), 10000000000000 + int(further_split[2])))
             buttons.append(temp)
             temp = []
             continue
@@ -47,7 +47,7 @@ for trio in buttons:
     y_as_int = round(linear_ans[1])
 
     # problems with numpy
-    delta = 0.000000001
+    delta = 0.000000000000001
     if np.isclose(linear_ans[0], x_as_int, delta) and np.isclose(linear_ans[1], y_as_int, delta):
         curr = (linear_ans[0] * 3) + linear_ans[1]
 
